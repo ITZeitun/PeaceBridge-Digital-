@@ -1,31 +1,41 @@
-/* GENERAL PAGE STYLING */
+/* ---------------- GENERAL PAGE STYLING ---------------- */
 body {
-    background: #f5f7fa;
+    background: #f4f7fa; /* softer, calming background */
     font-family: 'Poppins', sans-serif;
+    color: #1f2937; /* modern dark gray */
+    line-height: 1.6;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
-h2 {
+h1, h2, h3, h4 {
     font-weight: 600;
+    color: #0072B1; /* SDG 16 themed blue */
 }
 
-/* NAVBAR */
+/* ---------------- NAVBAR ---------------- */
 .navbar {
-    padding: 15px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    padding: 15px 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    background: #ffffff;
+    border-radius: 12px;
 }
 
 .nav-link {
     font-size: 16px;
     font-weight: 500;
+    color: #1f2937;
+    transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .nav-link:hover {
-    color: #d8ffe0 !important;
+    color: #00BFA6; /* teal accent for SDG 16 */
+    transform: translateY(-2px);
 }
 
-/* CARD SECTIONS */
+/* ---------------- CARD SECTIONS ---------------- */
 .container {
     max-width: 900px;
+    margin: auto;
 }
 
 .shadow {
@@ -33,72 +43,116 @@ h2 {
 }
 
 .bg-white {
+    background-color: #ffffff;
     border-radius: 20px !important;
 }
 
-/* DASHBOARD CARDS */
+/* ---------------- DASHBOARD CARDS ---------------- */
 #dashboard .p-4 {
     background: #ffffff;
     border-radius: 18px;
     box-shadow: 0 6px 16px rgba(0,0,0,0.05);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 #dashboard .p-4:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+    background: linear-gradient(135deg, #e0f7fa, #ffffff);
 }
 
 #dashboard h4 {
     font-weight: 600;
 }
 
-/* FORMS */
-form label {
-    font-weight: 500;
-    color: #333;
-}
-
+/* ---------------- FORM ELEMENTS ---------------- */
 form input,
-form textarea {
-    border-radius: 12px !important;
-    padding: 12px !important;
-    border: 1px solid #ccc;
-    transition: all 0.2s ease;
+form textarea,
+form select {
+    border: 1px solid #d1d5db; /* light gray border */
+    border-radius: 12px;
+    padding: 10px 15px;
+    font-size: 14px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 form input:focus,
-form textarea:focus {
-    border-color: #198754;
-    box-shadow: 0 0 8px rgba(25, 135, 84, 0.3);
+form textarea:focus,
+form select:focus {
+    border-color: #00BFA6; /* teal accent */
+    box-shadow: 0 0 6px rgba(0, 191, 166, 0.3);
+    outline: none;
 }
 
-/* BUTTONS */
-.btn-success {
-    background: linear-gradient(135deg, #1e9e60, #0f7a45);
+form button {
+    background: #00BFA6;
+    color: #ffffff;
     border: none;
-    padding: 12px;
-    font-size: 17px;
-    border-radius: 14px;
-    transition: all 0.2s ease;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
 }
 
-.btn-success:hover {
-    background: linear-gradient(135deg, #1ac06d, #0b5c34);
+form button:hover {
+    background: #00796b;
     transform: translateY(-2px);
 }
 
-/* CONTACT FORM */
-#contact textarea {
-    height: 120px;
+/* ---------------- IMAGE STYLING ---------------- */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 18px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+    margin: 15px 0;
 }
 
-/* SECTION TITLES */
-.text-success {
-    color: #1e9e60 !important;
+/* ---------------- TABLES / LISTS ---------------- */
+ul.list-group li {
+    border-radius: 12px;
+    margin-bottom: 8px;
+    padding: 12px 15px;
+    transition: background 0.3s ease;
 }
 
-#dashboard, #donate, #contact {
-    padding-top: 40px;
+ul.list-group li:hover {
+    background: #e0f7fa;
 }
 
+/* ---------------- CHART CONTAINERS ---------------- */
+canvas {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 15px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+}
+
+/* ---------------- MEDIA QUERIES ---------------- */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 12px 20px;
+    }
+    #dashboard .row {
+        flex-direction: column;
+    }
+    canvas {
+        margin-bottom: 20px;
+    }
+}
+
+/* ---------------- ADDITIONAL TYPOGRAPHY ---------------- */
+h1 {
+    font-weight: 700;
+    color: #0072B1;
+}
+
+p.lead {
+    font-size: 18px;
+    color: #374151;
+}
