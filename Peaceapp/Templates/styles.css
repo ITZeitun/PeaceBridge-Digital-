@@ -1,0 +1,104 @@
+/* GENERAL PAGE STYLING */
+body {
+    background: #f5f7fa;
+    font-family: 'Poppins', sans-serif;
+}
+
+h2 {
+    font-weight: 600;
+}
+
+/* NAVBAR */
+.navbar {
+    padding: 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.nav-link {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #d8ffe0 !important;
+}
+
+/* CARD SECTIONS */
+.container {
+    max-width: 900px;
+}
+
+.shadow {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.07) !important;
+}
+
+.bg-white {
+    border-radius: 20px !important;
+}
+
+/* DASHBOARD CARDS */
+#dashboard .p-4 {
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#dashboard .p-4:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+#dashboard h4 {
+    font-weight: 600;
+}
+
+/* FORMS */
+form label {
+    font-weight: 500;
+    color: #333;
+}
+
+form input,
+form textarea {
+    border-radius: 12px !important;
+    padding: 12px !important;
+    border: 1px solid #ccc;
+    transition: all 0.2s ease;
+}
+
+form input:focus,
+form textarea:focus {
+    border-color: #198754;
+    box-shadow: 0 0 8px rgba(25, 135, 84, 0.3);
+}
+
+/* BUTTONS */
+.btn-success {
+    background: linear-gradient(135deg, #1e9e60, #0f7a45);
+    border: none;
+    padding: 12px;
+    font-size: 17px;
+    border-radius: 14px;
+    transition: all 0.2s ease;
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #1ac06d, #0b5c34);
+    transform: translateY(-2px);
+}
+
+/* CONTACT FORM */
+#contact textarea {
+    height: 120px;
+}
+
+/* SECTION TITLES */
+.text-success {
+    color: #1e9e60 !important;
+}
+
+#dashboard, #donate, #contact {
+    padding-top: 40px;
+}
+
