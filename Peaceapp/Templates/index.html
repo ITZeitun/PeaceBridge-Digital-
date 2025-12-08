@@ -2,15 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Donation & Dashboard</title>
-
+    <title>PeaceBridge - Dashboard & Support</title>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-          <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
-
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
 <body class="bg-light">
 
 <!-- NAVBAR -->
@@ -21,59 +18,90 @@
                 data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#overview">Overview</a></li>
                 <li class="nav-item"><a class="nav-link" href="#dashboard">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="#resources">Resources</a></li>
                 <li class="nav-item"><a class="nav-link" href="#donate">Donate</a></li>
+                <li class="nav-item"><a class="nav-link" href="#report">Report</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
-
-
+<!-- HERO / OVERVIEW SECTION -->
+<div id="overview" class="container mt-5 p-5 bg-white shadow rounded text-center">
+    <h1 class="text-success">Welcome to PeaceBridge</h1>
+    <p class="lead mt-3">PeaceBridge is a platform promoting transparency, accountability, and civic engagement by providing citizens and institutions with digital tools to strengthen governance and access to justice.</p>
+    <h3 class="mt-4">Mission & Objectives</h3>
+    <ul class="text-start mt-3">
+        <li><strong>Promote Peaceful Communities:</strong> Forums for dialogue, education on non-violent communication, and community-building.</li>
+        <li><strong>Enhance Access to Justice:</strong> Centralized legal resources, verified support networks, and guidance for filing cases.</li>
+        <li><strong>Strengthen Institutions:</strong> Transparency tools, dashboards, and secure complaint submissions.</li>
+    </ul>
+</div>
 
 <!-- DASHBOARD SECTION -->
 <div id="dashboard" class="container mt-5 p-4 bg-white shadow rounded">
     <h2 class="text-success text-center">Dashboard</h2>
     <p class="text-center">Overview of donations and user activity.</p>
 
-    <div class="row mt-4">
-        <div class="col-md-4">
-            <div class="p-4 border rounded text-center">
+    <div class="row mt-4 text-center">
+        <div class="col-md-4 mb-3">
+            <div class="p-4 border rounded">
                 <h4>Total Donations</h4>
                 <p class="fw-bold text-success">{{ total_donations }}</p>
             </div>
         </div>
-
-        <div class="col-md-4">
-            <div class="p-4 border rounded text-center">
+        <div class="col-md-4 mb-3">
+            <div class="p-4 border rounded">
                 <h4>Number of Donors</h4>
                 <p class="fw-bold text-success">{{ donor_count }}</p>
             </div>
         </div>
-
-        <div class="col-md-4">
-            <div class="p-4 border rounded text-center">
+        <div class="col-md-4 mb-3">
+            <div class="p-4 border rounded">
                 <h4>Latest Donation</h4>
-                <p class="fw-bold">
-                    {% if latest_donation %}
-                        {{ latest_donation }}
-                    {% else %}
-                        No donations yet
-                    {% endif %}
-                </p>
+                <p class="fw-bold">{% if latest_donation %}{{ latest_donation }}{% else %}No donations yet{% endif %}</p>
             </div>
+        </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="row mt-4">
+        <div class="col-md-6 mb-3">
+            <canvas id="donationsChart"></canvas>
+        </div>
+        <div class="col-md-6 mb-3">
+            <canvas id="donorChart"></canvas>
         </div>
     </div>
 </div>
 
+<!-- JUSTICE RESOURCE CENTER -->
+<div id="resources" class="container mt-5 p-5 bg-white shadow rounded">
+    <h2 class="text-center text-success">Justice Resource Center</h2>
+    <p class="text-center">Search national and local laws, legal aid, and educational articles.</p>
 
+    <form method="GET" action="{% url 'search_resources' %}">
+        <div class="input-group mb-3">
+            <input type="text" name="query" class="form-control" placeholder="Enter keywords..." required>
+            <button class="btn btn-success" type="submit">Search</button>
+        </div>
+    </form>
 
-
-
+    {% if search_results %}
+        <ul class="list-group mt-3">
+            {% for result in search_results %}
+                <li class="list-group-item">
+                    <a href="{{ result.url }}" target="_blank">{{ result.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
 
 <!-- DONATION FORM SECTION -->
 <div id="donate" class="container mt-5 p-5 bg-white shadow rounded">
@@ -82,24 +110,45 @@
 
     <form method="POST">
         {% csrf_token %}
-        
         <div class="mb-3">
             <label class="form-label">Phone Number (2547xxxxx)</label>
             <input type="text" name="phone" class="form-control" required>
         </div>
-
         <div class="mb-3">
             <label class="form-label">Amount</label>
             <input type="number" name="amount" class="form-control" required>
         </div>
-
         <button class="btn btn-success w-100">Donate</button>
     </form>
 </div>
 
+<!-- CITIZEN REPORTING FORM -->
+<div id="report" class="container mt-5 p-5 bg-white shadow rounded">
+    <h2 class="text-center text-success">Report an Issue</h2>
+    <p class="text-center">Submit concerns such as corruption, human rights violations, or community issues. You may remain anonymous.</p>
 
-
-
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label">Issue Type</label>
+            <select class="form-select" name="issue_type" required>
+                <option value="">Select an issue</option>
+                <option value="corruption">Corruption</option>
+                <option value="human-rights">Human Rights</option>
+                <option value="community">Community Concern</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea name="description" class="form-control" rows="4" required></textarea>
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" name="anonymous" class="form-check-input" id="anonymousCheck" checked>
+            <label class="form-check-label" for="anonymousCheck">Submit anonymously</label>
+        </div>
+        <button class="btn btn-success w-100">Submit Report</button>
+    </form>
+</div>
 
 <!-- CONTACT FORM SECTION -->
 <div id="contact" class="container mt-5 p-4 bg-white shadow rounded mb-5">
@@ -114,28 +163,53 @@
             <label class="form-label">Your Name</label>
             <input type="text" name="name" class="form-control" required>
         </div>
-
         <div class="mb-3">
             <label class="form-label">Email Address</label>
             <input type="email" name="email" class="form-control" required>
         </div>
-
         <div class="mb-3">
             <label class="form-label">Message</label>
             <textarea name="message" class="form-control" rows="4" required></textarea>
         </div>
-
         <button class="btn btn-success w-100">Submit</button>
     </form>
 </div>
 
-
-
-
-
-
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Donation Chart
+    const donationsCtx = document.getElementById('donationsChart').getContext('2d');
+    const donationsChart = new Chart(donationsCtx, {
+        type: 'line',
+        data: {
+            labels: {{ donation_dates|safe }},
+            datasets: [{
+                label: 'Donations Over Time',
+                data: {{ donation_amounts|safe }},
+                borderColor: 'rgba(40, 167, 69, 1)',
+                backgroundColor: 'rgba(40, 167, 69, 0.2)',
+                fill: true
+            }]
+        },
+        options: { responsive: true }
+    });
+
+    // Donor Chart
+    const donorCtx = document.getElementById('donorChart').getContext('2d');
+    const donorChart = new Chart(donorCtx, {
+        type: 'bar',
+        data: {
+            labels: {{ donor_names|safe }},
+            datasets: [{
+                label: 'Donation Amount',
+                data: {{ donor_amounts|safe }},
+                backgroundColor: 'rgba(40, 167, 69, 0.7)'
+            }]
+        },
+        options: { responsive: true }
+    });
+</script>
 
 </body>
 </html>
