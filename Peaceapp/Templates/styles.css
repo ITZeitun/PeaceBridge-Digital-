@@ -1,158 +1,155 @@
 /* ---------------- GENERAL PAGE STYLING ---------------- */
 body {
-    background: #f4f7fa; /* softer, calming background */
+    background: #446d91; /* Calming blue background */
     font-family: 'Poppins', sans-serif;
-    color: #1f2937; /* modern dark gray */
+    color: #f2f2f2; /* White text for readability */
     line-height: 1.6;
     transition: background 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, h4 {
-    font-weight: 600;
-    color: #0072B1; /* SDG 16 themed blue */
+    font-weight: 700;
+    color: #000000; /* Black headings */
 }
 
 /* ---------------- NAVBAR ---------------- */
 .navbar {
     padding: 15px 30px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    background: #ffffff;
+    background: #1a1a1a; /* Dark navbar for contrast */
     border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
 
 .nav-link {
     font-size: 16px;
     font-weight: 500;
-    color: #1f2937;
+    color: black; /* White links */
     transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .nav-link:hover {
-    color: #00BFA6; /* teal accent for SDG 16 */
+    color: #00e0b3; /* Bright teal hover */
     transform: translateY(-2px);
 }
 
-/* ---------------- CARD SECTIONS ---------------- */
-.container {
-    max-width: 900px;
-    margin: auto;
-}
-
-.shadow {
-    box-shadow: 0 8px 20px rgba(0,0,0,0.07) !important;
-}
-
-.bg-white {
-    background-color: #ffffff;
-    border-radius: 20px !important;
-}
-
-/* ---------------- DASHBOARD CARDS ---------------- */
-#dashboard .p-4 {
-    background: #ffffff;
-    border-radius: 18px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-#dashboard .p-4:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.12);
-    background: linear-gradient(135deg, #e0f7fa, #ffffff);
-}
-
-#dashboard h4 {
+.nav-link.active {
     font-weight: 600;
+    color: #00ffc1 !important; /* Active link highlight */
 }
 
-/* ---------------- FORM ELEMENTS ---------------- */
-form input,
-form textarea,
-form select {
-    border: 1px solid #d1d5db; /* light gray border */
-    border-radius: 12px;
-    padding: 10px 15px;
-    font-size: 14px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+/* ---------------- HERO SECTION ---------------- */
+.hero-section {
+    position: relative;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                url('https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover no-repeat;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff; /* Default text color */
+    text-align: center;
+    padding: 0 15px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    margin-bottom: 50px;
+    overflow: hidden;
+}
+
+/* Optional overlay for readability */
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    box-sizing: border-box;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    border-radius: 20px;
+    z-index: 1;
 }
 
-form input:focus,
-form textarea:focus,
-form select:focus {
-    border-color: #00BFA6; /* teal accent */
-    box-shadow: 0 0 6px rgba(0, 191, 166, 0.3);
-    outline: none;
+.hero-section > * {
+    position: relative;
+    z-index: 2; /* Ensure text is above overlay */
 }
 
-form button {
-    background: #00BFA6;
+/* Headings inside hero */
+.hero-section h1,
+.hero-section h2,
+.hero-section h3,
+.hero-section h4 {
+    color: #ffffff !important;
+    text-shadow: 3px 3px 10px rgba(0,0,0,0.8); /* Strong shadow */
+    margin-bottom: 20px;
+}
+
+/* Paragraphs inside hero */
+.hero-section p {
+    font-size: 1.3rem;
+    max-width: 700px;
+    margin-bottom: 30px;
     color: #ffffff;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 12px;
-    font-size: 16px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+
+/* Buttons inside hero */
+.hero-section .btn {
+    background: #00e0b3; /* Teal button */
+    color: #1a1a1a; /* Dark text */
     font-weight: 600;
-    transition: background 0.3s ease, transform 0.2s ease;
+    padding: 12px 25px;
+    border-radius: 50px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.hero-section .btn:hover {
+    background: #00bfa6;
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* ---------------- OTHER ELEMENTS ---------------- */
+a {
+    color: #00e0b3;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #00bfa6;
+}
+
+button, input[type="submit"] {
     cursor: pointer;
 }
 
-form button:hover {
-    background: #00796b;
-    transform: translateY(-2px);
+/* Smooth scroll */
+html {
+    scroll-behavior: smooth;
 }
 
-/* ---------------- IMAGE STYLING ---------------- */
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 18px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.05);
-    margin: 15px 0;
-}
-
-/* ---------------- TABLES / LISTS ---------------- */
-ul.list-group li {
-    border-radius: 12px;
-    margin-bottom: 8px;
-    padding: 12px 15px;
-    transition: background 0.3s ease;
-}
-
-ul.list-group li:hover {
-    background: #e0f7fa;
-}
-
-/* ---------------- CHART CONTAINERS ---------------- */
-canvas {
-    background: #ffffff;
-    border-radius: 18px;
-    padding: 15px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.05);
-}
-
-/* ---------------- MEDIA QUERIES ---------------- */
+/* ---------------- RESPONSIVE ---------------- */
 @media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+
+    .hero-section p {
+        font-size: 1.1rem;
+    }
+
+    .hero-section .btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
     .navbar {
-        padding: 12px 20px;
+        padding: 10px 15px;
     }
-    #dashboard .row {
-        flex-direction: column;
-    }
-    canvas {
-        margin-bottom: 20px;
-    }
-}
 
-/* ---------------- ADDITIONAL TYPOGRAPHY ---------------- */
-h1 {
-    font-weight: 700;
-    color: #0072B1;
-}
-
-p.lead {
-    font-size: 18px;
-    color: #374151;
+    .nav-link {
+        font-size: 14px;
+    }
 }
