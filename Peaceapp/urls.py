@@ -18,4 +18,3 @@ urlpatterns = [
     # Logout page
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
 ]
-
